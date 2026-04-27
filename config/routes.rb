@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  resources :expenses
+  root "expenses#index"
+  get "expenses/new", to: "expenses#new"
+  post "expenses", to: "expenses#create"
+  get "expenses/:id/edit", to: "expenses#edit"
+  patch "expenses/:id", to: "expenses#update"
+  delete "expenses/:id", to: "expenses#destroy"
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  resources :users, only: [:new, :create]
+  get "signup", to: "users#new"
+  post "signup", to: "users#create"
 end

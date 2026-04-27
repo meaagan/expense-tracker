@@ -1,0 +1,40 @@
+<h1>Sign up</h1>
+
+<%= form_with model: @user, url: signup_path do |f| %>
+  <% if @user.errors.any? %>
+    <div role="alert">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this account from being saved:</h2>
+      <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name %>
+  </div>
+
+  <div>
+    <%= f.label :last_name %>
+    <%= f.text_field :last_name %>
+  </div>
+
+  <div>
+    <%= f.label :email %>
+    <%= f.email_field :email %>
+  </div>
+
+  <div>
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </div>
+
+  <div>
+    <%= f.submit "Create account" %>
+  </div>
+<% end %>
+
+<p><%= link_to "Back to expenses", root_path %></p>

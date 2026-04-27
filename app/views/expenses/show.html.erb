@@ -1,0 +1,21 @@
+<h1>Expense</h1>
+
+<dl>
+  <dt>Name</dt>
+  <dd><%= @expense.name %></dd>
+
+  <dt>Category</dt>
+  <dd><%= @expense.category.to_s.titleize %></dd>
+
+  <dt>Amount</dt>
+  <dd><%= number_to_currency(@expense.amount) %></dd>
+
+  <dt>Date</dt>
+  <dd><%= @expense.date&.strftime("%Y-%m-%d") %></dd>
+</dl>
+
+<p>
+  <%= link_to "Edit", edit_expense_path(@expense) %> |
+  <%= link_to "Back to list", expenses_path %> |
+  <%= link_to "Delete", expense_path(@expense), data: { turbo_method: :delete, turbo_confirm: "Delete this expense?" } %>
+</p>
