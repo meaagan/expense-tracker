@@ -10,26 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2026_04_27_012149) do
-  create_table "expenses", force: :cascade do |t|
-    t.string "category"
+ActiveRecord::Schema[8.0].define(version: 2026_04_28_012436) do
+  create_table "expenses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.float "amount"
-    t.integer "user_id", null: false
-    t.date "date"
+    t.bigint "users_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_expenses_on_user_id"
+    t.index ["users_id"], name: "index_expenses_on_users_id"
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "email"
-    t.string "password"
+  create_table "sessions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "ip_address"
+    t.string "user_agent"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
-  add_foreign_key "expenses", "users"
+  create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "email_address", null: false
+    t.string "password_digest", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email_address"], name: "index_users_on_email_address", unique: true
+  end
+
+  add_foreign_key "expenses", "users", column: "users_id"
+  add_foreign_key "sessions", "users"
 end

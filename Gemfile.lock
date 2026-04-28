@@ -260,7 +260,7 @@ DEPENDENCIES
   debug
   importmap-rails
   jbuilder
-  mysql2
+  mysql2 (~> 0.5)
   puma (~> 6.0)
   rails (= 8.0.1)
   selenium-webdriver
