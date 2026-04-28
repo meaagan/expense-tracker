@@ -1,11 +1,6 @@
 class User < ApplicationRecord
-    has_many :expenses
-    validates :first_name, presence: true
-    validates :last_name, presence: true
-    validates :email, presence: true, uniqueness: true
-    validates :password, presence: true
+  has_secure_password
+  has_many :sessions, dependent: :destroy
 
-    def full_name
-        "#{first_name} #{last_name}"
-    end
+  normalizes :email_address, with: ->(e) { e.strip.downcase }
 end

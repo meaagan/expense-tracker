@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resource :session
+  resources :passwords, param: :token
   resources :expenses
   root "expenses#index"
   get "expenses/new", to: "expenses#new"
