@@ -13,3 +13,185 @@
  *= require_tree .
  *= require_self
  */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 15px;
+  color: #222;
+  background: #f5f5f5;
+  line-height: 1.5;
+}
+
+/* Nav */
+nav {
+  background: #1a1a2e;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+nav a {
+  color: #ccc;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+nav a:hover { color: #fff; }
+
+nav form { display: inline; }
+
+nav input[type="submit"], nav button {
+  background: none;
+  border: 1px solid #555;
+  color: #ccc;
+  padding: 4px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+nav input[type="submit"]:hover, nav button:hover {
+  border-color: #aaa;
+  color: #fff;
+}
+
+/* Page wrapper */
+main {
+  max-width: 900px;
+  margin: 32px auto;
+  padding: 0 24px;
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+/* Flash */
+div[role="alert"] {
+  max-width: 900px;
+  margin: 16px auto 0;
+  padding: 10px 16px;
+  background: #fff3cd;
+  border-left: 4px solid #f0ad4e;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+/* Content card */
+.card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.08);
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.08);
+  overflow: hidden;
+}
+
+th, td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+th {
+  background: #f9f9f9;
+  font-weight: 600;
+  font-size: 13px;
+  color: #555;
+}
+
+th a { color: #555; text-decoration: none; }
+th a:hover { color: #222; }
+
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: #fafafa; }
+
+/* Links */
+a { color: #4a6cf7; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Action links in table cells */
+td a {
+  font-size: 13px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  color: #555;
+}
+
+td a:hover { background: #f0f0f0; text-decoration: none; border-color: #aaa; }
+
+td a[data-turbo-method] { color: #c0392b; border-color: #f5c6cb; }
+td a[data-turbo-method]:hover { background: #fdf2f2; border-color: #c0392b; }
+
+/* Paragraphs */
+p {
+  margin-bottom: 16px;
+}
+
+/* Forms */
+form {
+  max-width: 480px;
+}
+
+form div {
+  margin-bottom: 16px;
+}
+
+label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 4px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="date"],
+select {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  background: #fff;
+  color: #222;
+  transition: border-color .15s;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: #4a6cf7;
+  box-shadow: 0 0 0 3px rgba(74,108,247,.12);
+}
+
+input[type="submit"], button[type="submit"] {
+  background: #4a6cf7;
+  color: #fff;
+  border: none;
+  padding: 9px 20px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover, button[type="submit"]:hover {
+  background: #3a5ce6;
+}

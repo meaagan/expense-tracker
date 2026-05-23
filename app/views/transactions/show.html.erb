@@ -1,0 +1,21 @@
+<h1>Transaction</h1>
+
+<dl>
+  <dt>Name</dt>
+  <dd><%= @transaction.name %></dd>
+
+  <dt>Category</dt>
+  <dd><%= @transaction.category.to_s.titleize %></dd>
+
+  <dt>Amount</dt>
+  <dd><%= number_to_currency(@transaction.amount) %></dd>
+
+  <dt>Date</dt>
+  <dd><%= @transaction.date&.strftime("%Y-%m-%d") %></dd>
+</dl>
+
+<p>
+  <%= link_to "Edit", edit_transaction_path(@transaction) %> |
+  <%= link_to "Back to list", transactions_path %> |
+  <%= link_to "Delete", transaction_path(@transaction), data: { turbo_method: :delete, turbo_confirm: "Delete this transaction?" } %>
+</p>

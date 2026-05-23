@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :expenses, dependent: :destroy
+  has_many :transactions, dependent: :destroy
   has_many :budgets, dependent: :destroy
 
   def current_budget

@@ -8,12 +8,12 @@ class Budget < ApplicationRecord
 
   accepts_nested_attributes_for :budget_categories, allow_destroy: true, reject_if: :all_blank
 
-  def category_totals(expenses = user.expenses)
-    expenses.where(category: budget_categories.pluck(:name)).group(:category).sum(:amount)
+  def category_totals(transactions = user.transactions)
+    transactions.where(category: budget_categories.pluck(:name)).group(:category).sum(:amount)
   end
 
-  def category_status(expenses = user.expenses)
-    totals = category_totals(expenses)
+  def category_status(transactions = user.transactions)
+    totals = category_totals(transactions)
 
     budget_categories.map do |budget_category|
       spent = totals[budget_category.name].to_f

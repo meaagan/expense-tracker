@@ -1,9 +1,9 @@
-<%= form_with model: @expense do |f| %>
-  <% if @expense.errors.any? %>
+<%= form_with model: @transaction do |f| %>
+  <% if @transaction.errors.any? %>
     <div role="alert">
-      <h2><%= pluralize(@expense.errors.count, "error") %> prohibited this expense from being saved:</h2>
+      <h2><%= pluralize(@transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
       <ul>
-        <% @expense.errors.full_messages.each do |msg| %>
+        <% @transaction.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
         <% end %>
       </ul>
@@ -21,7 +21,7 @@
     <% category_options = if budget.present?
       budget.budget_categories.map { |category| [category.name, category.name] }
     else
-      Expense::DEFAULT_CATEGORIES.map { |name| [name.titleize, name] }
+      Transaction::DEFAULT_CATEGORIES.map { |name| [name.titleize, name] }
     end %>
     <%= f.select :category, category_options, include_blank: "Select a category" %>
   </div>

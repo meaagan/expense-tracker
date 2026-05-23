@@ -1,8 +1,17 @@
 <h1>Welcome to Expense Tracker</h1>
 
-<p>Please log in to manage your expenses.</p>
+<% if user_signed_in? %>
+  <p>Manage your budgets and transactions to stay on top of your finances.</p>
 
-<p>
-  <%= link_to "Sign in", new_user_session_path %> or
-  <%= link_to "Sign up", new_user_registration_path %>
-</p>
+  <p>
+    <%= link_to "View Budgets", budgets_path %> |
+    <%= link_to "View Transactions", transactions_path %>
+  </p>
+<% else %>
+    <p>Please log in to manage your transactions.</p>
+
+    <p>
+    <%= link_to "Sign in", new_user_session_path %> or
+    <%= link_to "Sign up", new_user_registration_path %>
+    </p>
+<% end %>

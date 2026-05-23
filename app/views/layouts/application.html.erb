@@ -13,8 +13,9 @@
   <body>
     <nav>
       <% if user_signed_in? %>
-        <%= link_to "Expenses", expenses_path %> |
+        <%= link_to "Transactions", transactions_path %> |
         <%= link_to "Budgets", budgets_path %> |
+        <%= link_to "Current Budget", @current_budget ? budget_path(@current_budget) : budgets_path %> |
         <%= button_to "Logout", destroy_user_session_path, method: :delete %>
       <% else %>
         <%= link_to "Sign in", new_user_session_path %> |
@@ -25,6 +26,8 @@
     <% flash.each do |type, message| %>
       <div role="alert"><%= message %></div>
     <% end %>
-    <%= yield %>
+    <main>
+      <%= yield %>
+    </main>
   </body>
 </html>

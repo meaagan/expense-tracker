@@ -41,6 +41,10 @@ class BudgetsController < ApplicationController
     redirect_to budgets_path, notice: "Budget was successfully deleted."
   end
 
+  def current_budget
+    current_user.budgets.last
+  end
+
   private
 
   def set_budget
