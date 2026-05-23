@@ -1,0 +1,42 @@
+<h1><%= @budget.title %></h1>
+
+<p>
+  <strong>Monthly income:</strong>
+  <%= number_to_currency(@budget.income_per_month) %>
+</p>
+
+<p>
+  <strong>Budget period:</strong>
+  <%= @budget.period_start.strftime("%B %Y") %>
+</p>
+
+<h2>Categories</h2>
+<% if @budget.budget_categories.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Budgeted</th>
+        <th>Spent</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @status.each do |category| %>
+        <tr>
+          <td><%= category[:name] %></td>
+          <td><%= number_to_currency(category[:budgeted]) %></td>
+          <td><%= number_to_currency(category[:spent]) %></td>
+          <td><%= category[:over_budget] ? "Over budget" : "Within budget" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No categories defined for this budget.</p>
+<% end %>
+
+<p>
+  <%= link_to "Edit Budget", edit_budget_path(@budget) %> |
+  <%= link_to "Back to Budgets", budgets_path %>
+</p>

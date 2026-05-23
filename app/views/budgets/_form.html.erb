@@ -1,0 +1,55 @@
+<%= form_with model: budget do |f| %>
+  <% if budget.errors.any? %>
+    <div role="alert">
+      <h2><%= pluralize(budget.errors.count, "error") %> prohibited this budget from being saved:</h2>
+      <ul>
+        <% budget.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+
+  <div>
+    <%= f.label :income_per_month, "Monthly income" %><br>
+    <%= f.number_field :income_per_month, step: 0.01 %>
+  </div>
+
+  <div>
+    <%= f.label :period_start, "Budget period" %><br>
+    <%= f.date_field :period_start %>
+  </div>
+
+  <h2>Budget categories</h2>
+  <div id="budget-categories">
+    <%= f.fields_for :budget_categories do |category_fields| %>
+      <div>
+        <%= category_fields.label :name %><br>
+        <%= category_fields.text_field :name %>
+      </div>
+
+      <div>
+        <%= category_fields.label :amount, "Budgeted amount" %><br>
+        <%= category_fields.number_field :amount, step: 0.01 %>
+      </div>
+
+      <% if category_fields.object.persisted? %>
+        <div>
+          <%= category_fields.check_box :_destroy %>
+          <%= category_fields.label :_destroy, "Remove category" %>
+        </div>
+      <% end %>
+
+      <hr>
+    <% end %>
+  </div>
+
+  <div>
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -5,4 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :expenses, dependent: :destroy
+  has_many :budgets, dependent: :destroy
+
+  def current_budget
+    budgets.where("period_start <= ?", Date.current.beginning_of_month).order(period_start: :desc).first
+  end
 end

@@ -10,7 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_05_23_180628) do
+ActiveRecord::Schema[8.0].define(version: 2026_05_23_190000) do
+  create_table "budget_categories", force: :cascade do |t|
+    t.integer "budget_id", null: false
+    t.string "name", null: false
+    t.float "amount", default: 0.0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["budget_id"], name: "index_budget_categories_on_budget_id"
+  end
+
+  create_table "budgets", force: :cascade do |t|
+    t.string "title", null: false
+    t.float "income_per_month", default: 0.0, null: false
+    t.date "period_start", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_budgets_on_user_id"
+  end
+
   create_table "expenses", force: :cascade do |t|
     t.string "name"
     t.float "amount"
@@ -34,5 +53,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_05_23_180628) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "budget_categories", "budgets"
+  add_foreign_key "budgets", "users"
   add_foreign_key "expenses", "users"
 end

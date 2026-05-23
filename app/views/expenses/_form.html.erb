@@ -17,7 +17,13 @@
 
   <div>
     <%= f.label :category %>
-    <%= f.select :category, Expense::CATEGORIES.keys.map { |k| [k.to_s.titleize, k.to_s] }, include_blank: "Select a category" %>
+    <% budget = current_user.current_budget %>
+    <% category_options = if budget.present?
+      budget.budget_categories.map { |category| [category.name, category.name] }
+    else
+      Expense::DEFAULT_CATEGORIES.map { |name| [name.titleize, name] }
+    end %>
+    <%= f.select :category, category_options, include_blank: "Select a category" %>
   </div>
 
   <div>
