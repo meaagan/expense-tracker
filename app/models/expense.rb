@@ -9,11 +9,12 @@ class Expense < ApplicationRecord
         Others: 6
     }.freeze
     
-    belongs_to :user
     validates :category, presence: true, inclusion: { in: CATEGORIES.keys.map(&:to_s) }
     validates :name, presence: true
     validates :amount, presence: true, numericality: { greater_than: 0 }
     validates :date, presence: true
+
+    belongs_to :user
 
     def category_name
         CATEGORIES[category.to_sym]

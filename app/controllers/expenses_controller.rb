@@ -1,20 +1,22 @@
 class ExpensesController < ApplicationController
-    before_action :set_expense, only: [:show, :edit, :update, :destroy]
+    before_action :authenticate_user!, :set_expense, only: [:show, :edit, :update, :destroy]
+
+    helper_method :sort_direction, :sort_column
 
     def index
-        @expenses = Expense.all
+        @expenses = current_user.expenses.order(sort_column => sort_direction)
     end
 
     def show
-        @expense = Expense.find(params[:id])
+        @expense = current_user.expenses.find(params[:id])
     end
 
     def new
-        @expense = Expense.new
+        @expense = current_user.expenses.new
     end
 
     def create
-        @expense = Expense.new(expense_params)
+        @expense = current_user.expenses.new(expense_params)
         if @expense.save
             redirect_to expenses_path, notice: 'Expense was successfully created.'
         else
@@ -23,11 +25,11 @@ class ExpensesController < ApplicationController
     end
 
     def edit
-        @expense = Expense.find(params[:id])
+        @expense = current_user.expenses.find(params[:id])
     end
 
     def update
-        @expense = Expense.find(params[:id])
+        @expense = current_user.expenses.find(params[:id])
         if @expense.update(expense_params)
             redirect_to expenses_path, notice: 'Expense was successfully updated.'
         else
@@ -36,7 +38,7 @@ class ExpensesController < ApplicationController
     end
 
     def destroy
-        @expense = Expense.find(params[:id])
+        @expense = current_user.expenses.find(params[:id])
         @expense.destroy
         redirect_to expenses_path, notice: 'Expense was successfully destroyed.'
     end
@@ -44,10 +46,18 @@ class ExpensesController < ApplicationController
     private
 
     def set_expense
-        @expense = Expense.find(params[:id])
+        @expense = current_user.expenses.find(params[:id])
     end
 
     def expense_params
         params.require(:expense).permit(:category, :name, :amount, :date)
+    end
+
+    def sort_column
+        %w[name category amount date].include?(params[:sort]) ? params[:sort] : "date"
+    end
+
+    def sort_direction
+        %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
     end
 end

@@ -6,10 +6,10 @@
   <table>
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Category</th>
-        <th>Amount</th>
-        <th>Date</th>
+        <th><%= link_to "Name", expenses_path(sort: "name", direction: sort_column == "name" && sort_direction == "asc" ? "desc" : "asc") %></th>
+        <th><%= link_to "Category", expenses_path(sort: "category", direction: sort_column == "category" && sort_direction == "asc" ? "desc" : "asc") %></th>
+        <th><%= link_to "Amount", expenses_path(sort: "amount", direction: sort_column == "amount" && sort_direction == "asc" ? "desc" : "asc") %></th>
+        <th><%= link_to "Date", expenses_path(sort: "date", direction: sort_column == "date" && sort_direction == "asc" ? "desc" : "asc") %></th>
         <th colspan="3"></th>
       </tr>
     </thead>

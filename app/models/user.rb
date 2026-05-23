@@ -1,7 +1,8 @@
 class User < ApplicationRecord
-  has_secure_password
-  has_many :sessions, dependent: :destroy
-  has_many :expenses, dependent: :destroy
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable
 
-  normalizes :email_address, with: ->(e) { e.strip.downcase }
+  has_many :expenses, dependent: :destroy
 end

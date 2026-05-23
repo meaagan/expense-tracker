@@ -4,7 +4,9 @@ class CreateExpenses < ActiveRecord::Migration[8.0]
       create_table :expenses do |t|
         t.string :name
         t.float :amount
-        t.references :users, foreign_key: true
+        t.string :category
+        t.datetime :date
+        t.references :user, foreign_key: true
 
         t.timestamps
       end
